@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Vendor.Application.Common.Interface;
+using Vendor.Application.Models;
 using Vendor.Domain.Entitities;
 using Vendor.Infrastructure.Context;
 
@@ -15,7 +16,7 @@ namespace Vendor.Infrastructure.Persistence
             _context = context;
         }
 
-        public async Task<List<Merchant>> FindAll()
+        public async Task<List<Merchant>> FindAll(MerchantParameters merchantParameters)
         {
             return await _context.Merchants
                 .ToListAsync();

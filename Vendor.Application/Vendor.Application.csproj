@@ -9,10 +9,12 @@
   <ItemGroup>
     <None Remove="Common\" />
     <None Remove="Common\Interface\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Common\Interface\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vendor.Domain\Vendor.Domain.csproj" />

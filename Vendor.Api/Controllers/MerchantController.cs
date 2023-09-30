@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Vendor.Application.Common.Interface;
+using Vendor.Application.Models;
 using Vendor.Domain.Entitities;
 
 namespace Vendor.Api.Controllers
@@ -18,11 +19,11 @@ namespace Vendor.Api.Controllers
 
         // GET: /<controller>/
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(MerchantParameters merchantParameters)
         {
             try
             {
-                List<Merchant> vendors = await _merchantRepository.FindAll();
+                List<Merchant> vendors = await _merchantRepository.FindAll(merchantParameters);
 
                 return Ok(vendors);
             }
