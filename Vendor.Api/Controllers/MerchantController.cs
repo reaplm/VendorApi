@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Vendor.Application.Common.Interface;
 using Vendor.Application.Models;
 using Vendor.Domain.Entitities;
@@ -10,11 +11,14 @@ namespace Vendor.Api.Controllers
     public class MerchantController : ControllerBase
     {
         private IMerchantRepository _merchantRepository;
+        private IMediator _mediatR;
 
 
-        public MerchantController(IMerchantRepository merchantRepository)
+        public MerchantController(IMerchantRepository merchantRepository,
+            IMediator mediatR)
         {
             _merchantRepository = merchantRepository;
+            _mediatR = mediatR;
         }
 
         // GET: /<controller>/
