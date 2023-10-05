@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Vendor.Api.Commands;
 using Vendor.Api.Queries;
 using Vendor.Application.Models;
+using Vendor.Domain.Entitities;
 
 namespace Vendor.Api.Controllers
 {
@@ -46,6 +48,21 @@ namespace Vendor.Api.Controllers
                 return Ok(vendor);
             }
             catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "There was an exception retrieving records");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody]Merchant merchant)
+        {
+            try
+            {
+
+                var merchantResult = await _mediatR.Send(new CreateMerchantCommand { Merchant = merchant });
+                return StatusCode(201, merchantResult);
+            }
+            catch(Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     "There was an exception retrieving records");

@@ -15,6 +15,13 @@ namespace Vendor.Infrastructure.Persistence
         {
             _context = context;
         }
+        public async Task<Merchant> AddMerchant(Merchant merchant)
+        {
+             _context.Merchants.Add(merchant);
+            await _context.SaveChangesAsync();
+
+            return merchant;
+        }
 
         public async Task<List<Merchant>> FindAll(MerchantParameters merchantParameters)
         {

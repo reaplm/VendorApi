@@ -8,6 +8,7 @@ namespace Vendor.Application.Common.Interface
 	{
         Task<List<Merchant>> FindAll(MerchantParameters merchantParameters);
         Task<Merchant> FindById(int id);
+        Task<Merchant> AddMerchant(Merchant merchant);
     }
 }
 
