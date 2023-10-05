@@ -1,8 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Vendor.Application.Common.Interface;
+using Vendor.Api.Queries;
 using Vendor.Application.Models;
-using Vendor.Domain.Entitities;
 
 namespace Vendor.Api.Controllers
 {
@@ -10,14 +9,11 @@ namespace Vendor.Api.Controllers
     [Route("api/[controller]")]
     public class MerchantController : ControllerBase
     {
-        private IMerchantRepository _merchantRepository;
         private IMediator _mediatR;
 
 
-        public MerchantController(IMerchantRepository merchantRepository,
-            IMediator mediatR)
+        public MerchantController(IMediator mediatR)
         {
-            _merchantRepository = merchantRepository;
             _mediatR = mediatR;
         }
 
@@ -27,7 +23,8 @@ namespace Vendor.Api.Controllers
         {
             try
             {
-                List<Merchant> vendors = await _merchantRepository.FindAll(merchantParameters);
+                var vendors = await _mediatR.Send(
+                    new GetMerchantsQuery { MerchantParameters = merchantParameters });
 
                 return Ok(vendors);
             }
@@ -43,7 +40,8 @@ namespace Vendor.Api.Controllers
         {
             try
             {
-                var vendor = await _merchantRepository.FindById(id);
+                var vendor = await _mediatR.Send(
+                    new GetMerchantByIdQuery { Id = id });
 
                 return Ok(vendor);
             }
